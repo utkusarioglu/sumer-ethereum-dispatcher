@@ -1,4 +1,4 @@
-version: '3.9'
+version: "3.9"
 services:
   ethereum-dispatcher:
     volumes:
@@ -6,7 +6,33 @@ services:
       - vscode-exts-insiders:/root/.vscode-server-insiders/extensions
       - ~/.config/gh:/root/.config/gh
     command: /bin/sh -c "while sleep 1000; do :; done"
+    networks:
+      - ethereum-dispatcher
+    depends_on:
+      - kafka
+
+  kafka:
+    image: wurstmeister/kafka
+    ports:
+      - 9092:9092
+    environment:
+      KAFKA_ADVERTISED_HOST_NAME: kafka
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+    depends_on:
+      - zookeeper
+    networks:
+      - ethereum-dispatcher
+
+  zookeeper:
+    image: wurstmeister/zookeeper
+    ports:
+      - 2181:2181
+    networks:
+      - ethereum-dispatcher
 
 volumes:
   vscode-exts:
   vscode-exts-insiders:
+
+networks:
+  ethereum-dispatcher:

@@ -3,6 +3,8 @@ declare global {
     interface ProcessEnv {
       NODE_ENV: "production" | "testing" | "development";
       NETWORK: string; // homestad, goerli etc
+      KAFKA_BROKERS: string; // csv
+      HOSTNAME: string; // provided by docker or k8s
       INFURA_API_KEY: string;
     }
   }
