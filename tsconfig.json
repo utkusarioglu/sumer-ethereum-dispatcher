@@ -10,7 +10,8 @@
     "baseUrl": "./",
     "paths": {
       "_/*": ["./src/*"],
-      "_services/*": ["./src/services/*"]
+      "_services/*": ["./src/services/*"],
+      "_types/*": ["./src/types/*"]
     },
     "declaration": true,
     "declarationMap": true,
