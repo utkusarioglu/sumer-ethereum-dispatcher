@@ -1,0 +1,13 @@
+FROM node:alpine as BUILDER
+WORKDIR /usr/src/app
+COPY ethereum-dispatcher ethereum-dispatcher
+WORKDIR /usr/src/app/ethereum-dispatcher
+RUN yarn build
+
+FROM node:alpine 
+WORKDIR /usr/src/app/ethereum-dispatcher
+COPY --from=BUILDER /usr/src/app/ethereum-dispatcher/lib lib
+COPY --from=BUILDER /usr/src/app/ethereum-dispatcher/package.json .
+COPY --from=BUILDER /usr/src/app/ethereum-dispatcher/node_modules node_modules
+
+ENTRYPOINT yarn start
