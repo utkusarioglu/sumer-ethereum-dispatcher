@@ -7,6 +7,24 @@
       "problemMatcher": [],
       "label": "yarn dev",
       "detail": "Start dev instance"
+    },
+    {
+      "type": "npm",
+      "script": "build",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "problemMatcher": [],
+      "label": "yarn build",
+      "detail": "Create production build"
+    },
+    {
+      "type": "npm",
+      "script": "start",
+      "problemMatcher": [],
+      "label": "yarn start",
+      "detail": "Run production code"
     }
   ]
 }
