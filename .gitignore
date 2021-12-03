@@ -2,4 +2,6 @@ node_modules
 *.log
 *.env
 !example.env
-*.tsBuildInfo
+*tsBuildInfo.json
+/lib
+/types
