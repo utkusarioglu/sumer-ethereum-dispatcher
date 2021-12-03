@@ -1,0 +1,12 @@
+version: '3.9'
+services:
+  ethereum-dispatcher:
+    volumes:
+      - vscode-exts:/root/.vscode-server/extensions
+      - vscode-exts-insiders:/root/.vscode-server-insiders/extensions
+      - ~/.config/gh:/root/.config/gh
+    command: /bin/sh -c "while sleep 1000; do :; done"
+
+volumes:
+  vscode-exts:
+  vscode-exts-insiders:

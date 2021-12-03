@@ -1,0 +1,9 @@
+version: "3.9"
+
+services:
+  ethereum-dispatcher:
+    build:
+      dockerfile: Dockerfile.dev
+    working_dir: /usr/src/app/ethereum-dispatcher
+    volumes:
+      - .:/usr/src/app/ethereum-dispatcher

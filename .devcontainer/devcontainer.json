@@ -1,0 +1,12 @@
+{
+  "name": "ethereum-dispatcher",
+  "dockerComposeFile": ["../docker-compose.dev.yml", "docker-compose.yml"],
+  "service": "ethereum-dispatcher",
+  "workspaceFolder": "/usr/src/app/ethereum-dispatcher",
+  "settings": {
+    "workbench.colorCustomizations": {
+      "activityBar.background": "#460"
+    }
+  },
+  "extensions": []
+}
