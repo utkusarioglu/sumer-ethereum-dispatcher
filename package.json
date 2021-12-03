@@ -1,0 +1,16 @@
+{
+  "name": "sumer-ethereum-dispatcher",
+  "version": "1.0.0",
+  "description": "Ethereum network listener/dispatcher for Sumer project",
+  "main": "lib/index.js",
+  "types": "types/index.d.ts",
+  "author": "Utku Sarioglu <utkusarioglu@hotmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^16.11.11",
+    "typescript": "^4.5.2"
+  },
+  "dependencies": {
+    "tslib": "^2.3.1"
+  }
+}
