@@ -8,9 +8,11 @@ const eventEmitterService = {
   /**
    * PubSub for new ethereum block number updates
    */
-  blockNum: {
-    sub: (cb: CallbackWithOneParam<number>) => eventEmitter.on("block-num", cb),
-    pub: (blockNum: number) => eventEmitter.emit("block-num", blockNum),
+  blockNumber: {
+    sub: (cb: CallbackWithOneParam<number>) =>
+      eventEmitter.on("block-number", cb),
+    pub: (blockNumber: number) =>
+      eventEmitter.emit("block-number", blockNumber),
   },
 
   /**
