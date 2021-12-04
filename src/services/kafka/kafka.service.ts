@@ -1,6 +1,9 @@
 import { Admin, Kafka, Producer } from "kafkajs";
 import { KAFKA_BROKERS, HOSTNAME } from "_/config";
 
+/**
+ * Handles kafka cluster communications
+ */
 export class KafkaService {
   private kafka: Kafka;
   private producer: Producer;
@@ -12,13 +15,21 @@ export class KafkaService {
     this.admin = this.kafka.admin();
   }
 
+  /**
+   * Initiates producer connection
+   * @returns void promise
+   */
   async producerConnect() {
     return this.producer.connect();
   }
 
+  /**
+   * Sends block number from ethereum blockchain to the kafka cluster
+   * @param blockNum block number from ethereum blockchain
+   */
   async sendBlockNumber(blockNum: number) {
     this.producer.send({
-      topic: "block-number",
+      topic: "ethereum-block-number",
       messages: [
         {
           value: blockNum.toString(),
@@ -27,9 +38,13 @@ export class KafkaService {
     });
   }
 
+  /**
+   * Sends ethereum block content to kafka cluster
+   * @param blockContent block content from ethereum blockchain
+   */
   async sendBlockContent<T extends Object>(blockContent: T) {
     this.producer.send({
-      topic: "block-content",
+      topic: "ethereum-block-content",
       messages: [
         {
           value: JSON.stringify(blockContent, null, 2),
@@ -38,6 +53,12 @@ export class KafkaService {
     });
   }
 
+  /**
+   * Creates relevant topics in kafka cluster.
+   * @warning
+   * Note that this shall only be called in the development environment.
+   * Production topics shall be controlled by kafka/strimzi only.
+   */
   createTopics() {
     this.admin.createTopics({
       waitForLeaders: true,
