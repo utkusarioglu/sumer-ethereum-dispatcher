@@ -10,6 +10,10 @@ image:
   # Overrides the image tag whose default is the chart appVersion.
   tag: ""
 
+icImage:
+  repository: kafka-consumer-ic
+  tag: ""
+
 imagePullSecrets: []
 nameOverride: ""
 fullnameOverride: ""
@@ -89,3 +93,4 @@ nodeEnv: production
 infuraApiKey: key
 network: goerli
 kafkaBrokers: kafka:9092
+kafkaIcTopic: ethereum-block-number

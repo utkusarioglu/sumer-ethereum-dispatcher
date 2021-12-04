@@ -27,6 +27,16 @@ spec:
       serviceAccountName: {{ include "..serviceAccountName" . }}
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      initContainers:
+        - name: kafka-consumer-ic
+          image: "{{ .Values.icImage.registry }}/{{ .Values.icImage.repository }}:{{ .Values.icImage.tag }}"
+          env:
+            - name: NODE_ENV
+              value: production
+            - name: KAFKA_BROKERS
+              value: {{ .Values.kafkaBrokers }}
+            - name: KAFKA_TOPIC
+              value: {{ .Values.kafkaIcTopic }}
       containers:
         - name: {{ .Chart.Name }}
           securityContext:
