@@ -10,7 +10,7 @@ RUN mkdir /ghcli
 WORKDIR /ghcli
 RUN wget https://github.com/cli/cli/releases/download/v2.3.0/gh_2.3.0_linux_386.tar.gz -O ghcli.tar.gz
 RUN tar --strip-components=1 -xf ghcli.tar.gz
-RUN mv /ghcli/bin/gh /bin/
+RUN mv /ghcli/bin/gh /usr/bin/
 RUN rm -rf /ghcli
 
 WORKDIR /usr/src/app/polygon-dispatcher
