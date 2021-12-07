@@ -18,10 +18,14 @@ services:
     environment:
       KAFKA_ADVERTISED_HOST_NAME: kafka
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_CREATE_TOIPCS: "ethereum-block-number:1:1,ethereum-block-content:1:1"
+      KAFKA_LOG_DIRS: /logs
     depends_on:
       - zookeeper
     networks:
       - ethereum-dispatcher
+    volumes:
+      - kafka-logs:/logs
 
   zookeeper:
     image: wurstmeister/zookeeper
@@ -29,10 +33,16 @@ services:
       - 2181:2181
     networks:
       - ethereum-dispatcher
+    environment:
+      - ZK_DATADIR:/zookeeper-data
+    volumes:
+      - zookeeper-datadir:/zookeeper-data
 
 volumes:
   vscode-exts:
   vscode-exts-insiders:
+  kafka-logs:
+  zookeeper-datadir:
 
 networks:
   ethereum-dispatcher:
