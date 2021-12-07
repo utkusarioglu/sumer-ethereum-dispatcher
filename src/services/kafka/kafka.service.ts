@@ -52,27 +52,6 @@ export class KafkaService {
       ],
     });
   }
-
-  /**
-   * Creates relevant topics in kafka cluster.
-   * @warning
-   * Note that this shall only be called in the development environment.
-   * Production topics shall be controlled by kafka/strimzi only.
-   */
-  createTopics() {
-    this.admin.createTopics({
-      waitForLeaders: true,
-      topics: [
-        {
-          topic: "block-number",
-          numPartitions: 1,
-        },
-        {
-          topic: "block-content",
-          numPartitions: 1,
-        },
-      ],
-    });
-  }
 }
+
 export default new KafkaService(HOSTNAME, KAFKA_BROKERS);

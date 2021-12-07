@@ -4,8 +4,6 @@ import kafkaService from "_services/kafka/kafka.service";
 import { NODE_ENV } from "_/config";
 import http from "http";
 
-NODE_ENV === "development" && kafkaService.createTopics();
-
 kafkaService.producerConnect().then(() => {
   console.log("producer connected");
 
