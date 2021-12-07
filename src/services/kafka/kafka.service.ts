@@ -1,6 +1,7 @@
 import { Kafka, Producer, Message } from "kafkajs";
 import { KAFKA_BROKERS, HOSTNAME } from "_/config";
 import loggerService from "_/services/logger/logger.service";
+import { loggingServiceAdapter, kafkaLogLevelAdapter } from "./kafka.logger";
 
 /**
  * Handles kafka cluster communications
@@ -10,7 +11,12 @@ export class KafkaService {
   private producer: Producer;
 
   constructor(clientId: string, brokers: string[]) {
-    this.kafka = new Kafka({ clientId, brokers });
+    this.kafka = new Kafka({
+      clientId,
+      brokers,
+      logLevel: kafkaLogLevelAdapter(),
+      logCreator: loggingServiceAdapter,
+    });
     this.producer = this.kafka.producer({
       idempotent: true,
       maxInFlightRequests: 5,
