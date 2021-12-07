@@ -4,7 +4,7 @@ import type { CallbackWithOneParam } from "_/types/utils/callback.types";
 
 const eventEmitter = new EventEmitter();
 
-const eventEmitterService = {
+const eventService = {
   /**
    * PubSub for new ethereum block number updates
    */
@@ -26,4 +26,4 @@ const eventEmitterService = {
   },
 };
 
-export default eventEmitterService;
+export default eventService;
