@@ -1,4 +1,4 @@
-import { Admin, Kafka, Producer } from "kafkajs";
+import { Kafka, Producer } from "kafkajs";
 import { KAFKA_BROKERS, HOSTNAME } from "_/config";
 
 /**
@@ -7,12 +7,14 @@ import { KAFKA_BROKERS, HOSTNAME } from "_/config";
 export class KafkaService {
   private kafka: Kafka;
   private producer: Producer;
-  private admin: Admin;
 
   constructor(clientId: string, brokers: string[]) {
     this.kafka = new Kafka({ clientId, brokers });
-    this.producer = this.kafka.producer();
-    this.admin = this.kafka.admin();
+    this.producer = this.kafka.producer({
+      idempotent: true,
+      maxInFlightRequests: 5,
+      allowAutoTopicCreation: false,
+    });
   }
 
   /**
@@ -30,6 +32,7 @@ export class KafkaService {
   async sendBlockNumber(blockNum: number) {
     this.producer.send({
       topic: "ethereum-block-number",
+      acks: -1,
       messages: [
         {
           value: blockNum.toString(),
@@ -45,6 +48,7 @@ export class KafkaService {
   async sendBlockContent<T extends Object>(blockContent: T) {
     this.producer.send({
       topic: "ethereum-block-content",
+      acks: -1,
       messages: [
         {
           value: JSON.stringify(blockContent),
