@@ -4,7 +4,7 @@ import kafkaService from "_services/kafka/kafka.service";
 import loggerService from "_/services/logger/logger.service";
 import http from "http";
 
-kafkaService.producerConnect().then(() => {
+kafkaService.connect().then(() => {
   loggerService.info("Connected to Kafka");
 
   eventsService.blockNumber.sub((d) => kafkaService.sendBlockNumber(d));

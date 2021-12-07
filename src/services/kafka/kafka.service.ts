@@ -28,7 +28,7 @@ export class KafkaService {
    * Initiates producer connection
    * @returns void promise
    */
-  async producerConnect() {
+  async connect() {
     return this.producer.connect().catch(loggerService.error);
   }
 
