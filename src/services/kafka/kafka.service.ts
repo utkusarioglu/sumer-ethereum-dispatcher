@@ -47,7 +47,7 @@ export class KafkaService {
       topic: "ethereum-block-content",
       messages: [
         {
-          value: JSON.stringify(blockContent, null, 2),
+          value: JSON.stringify(blockContent),
         },
       ],
     });
