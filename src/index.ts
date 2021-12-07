@@ -1,15 +1,13 @@
 import ethereumService from "_services/ethereum/ethereum.service";
 import eeService from "_services/event-emitter/event-emitter.service";
 import kafkaService from "_services/kafka/kafka.service";
-import { NODE_ENV } from "_/config";
 import http from "http";
 
 kafkaService.producerConnect().then(() => {
-  console.log("producer connected");
+  console.log("ethereum-dispatcher connected to kafka");
 
   eeService.blockNumber.sub((d) => kafkaService.sendBlockNumber(d));
   eeService.blockContent.sub((d) => kafkaService.sendBlockContent(d));
-  eeService.blockContent.sub((d) => console.log(d));
 
   ethereumService.listen({
     blockNum: eeService.blockNumber.pub,
