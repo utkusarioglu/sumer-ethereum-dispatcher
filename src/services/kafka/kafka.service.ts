@@ -1,7 +1,15 @@
-import { Kafka, Producer, Message } from "kafkajs";
+import {
+  Kafka,
+  Producer,
+  Message,
+  CompressionTypes,
+  CompressionCodecs,
+} from "kafkajs";
 import { KAFKA_BROKERS, HOSTNAME } from "_/config";
 import loggerService from "_/services/logger/logger.service";
 import { loggingServiceAdapter, kafkaLogLevelAdapter } from "./kafka.logger";
+
+CompressionCodecs[CompressionTypes.Snappy] = require("kafkajs-snappy");
 
 /**
  * Handles kafka cluster communications
@@ -71,6 +79,7 @@ export class KafkaService {
         topic,
         acks: -1,
         messages,
+        compression: CompressionTypes.Snappy,
       })
       .then(() => this.sendLog(topic, messages))
       .catch(loggerService.error);
