@@ -58,6 +58,8 @@ spec:
               value: {{ .Values.network }}
             - name: KAFKA_BROKERS
               value: {{ .Values.kafkaBrokers }}
+            - name: LOG_LEVEL
+              value: debug
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}

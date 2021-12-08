@@ -94,3 +94,4 @@ infuraApiKey: key
 network: goerli
 kafkaBrokers: kafka:9092
 kafkaIcTopic: ethereum-block-number
+logLevel: debug
