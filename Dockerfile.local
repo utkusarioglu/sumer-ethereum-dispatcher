@@ -10,4 +10,6 @@ COPY --from=BUILDER /usr/src/app/ethereum-dispatcher/lib lib
 COPY --from=BUILDER /usr/src/app/ethereum-dispatcher/package.json .
 COPY --from=BUILDER /usr/src/app/ethereum-dispatcher/node_modules node_modules
 
+ARG PORT
+EXPOSE $PORT
 ENTRYPOINT yarn start
