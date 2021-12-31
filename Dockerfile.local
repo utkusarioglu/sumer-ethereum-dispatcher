@@ -2,6 +2,7 @@ FROM node:alpine as BUILDER
 WORKDIR /usr/src/app
 COPY ethereum-dispatcher ethereum-dispatcher
 WORKDIR /usr/src/app/ethereum-dispatcher
+RUN yarn
 RUN yarn build
 
 FROM node:alpine 
