@@ -29,7 +29,8 @@ spec:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
       initContainers:
         - name: kafka-consumer-ic
-          image: "{{ .Values.icImage.registry }}/{{ .Values.icImage.repository }}:{{ .Values.icImage.tag }}"
+          image: "{{ .Values.kafkaConsumerIcImage.repository }}:{{ .Values.kafkaConsumerIcImage.tag }}"
+          imagePullPolicy: {{ .Values.kafkaConsumerIcImage.pullPolicy }}
           env:
             - name: NODE_ENV
               value: production
