@@ -3,6 +3,7 @@ import eventsService from "_/services/events/events.service";
 import kafkaService from "_services/kafka/kafka.service";
 import loggerService from "_/services/logger/logger.service";
 import http from "http";
+import { PORT } from "_/__config";
 
 kafkaService.connect().then(() => {
   loggerService.info("Connected to Kafka");
@@ -22,4 +23,4 @@ const server = http.createServer((_req, res) => {
   res.end("OK");
 });
 
-server.listen(80, () => loggerService.info(`Running on ${80}`));
+server.listen(PORT, () => loggerService.info(`Running on ${PORT}`));
