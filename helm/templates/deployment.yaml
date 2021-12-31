@@ -70,7 +70,10 @@ spec:
             - name: NODE_ENV
               value: {{ .Values.nodeEnv | quote }}
             - name: INFURA_API_KEY
-              value: {{ .Values.infuraApiKey }}
+              valueFrom:
+                secretKeyRef:
+                  name: ethereum
+                  key: infura-api-key
             - name: NETWORK
               value: {{ .Values.network | quote }}
             - name: KAFKA_BROKERS

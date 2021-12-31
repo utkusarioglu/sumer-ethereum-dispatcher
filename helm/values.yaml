@@ -96,7 +96,6 @@ tolerations: []
 affinity: {}
 
 nodeEnv: production
-infuraApiKey: key
 network: goerli
 kafkaIcTopic: ethereum-block-number
 logLevel: info
