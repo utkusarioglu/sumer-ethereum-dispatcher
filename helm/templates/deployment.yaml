@@ -32,12 +32,12 @@ spec:
           image: "{{ .Values.kafkaConsumerIcImage.repository }}:{{ .Values.kafkaConsumerIcImage.tag }}"
           imagePullPolicy: {{ .Values.kafkaConsumerIcImage.pullPolicy }}
           env:
-            - name: NODE_ENV
+            - name: {{ .Values.nodeEnv | quote }}
               value: production
             - name: KAFKA_BROKERS
-              value: {{ .Values.kafkaBrokers }}
+              value: {{ .Values.kafkaBrokers | quote }}
             - name: KAFKA_TOPIC
-              value: {{ .Values.kafkaIcTopic }}
+              value: {{ .Values.kafkaIcTopic | quote }}
       containers:
         - name: {{ .Chart.Name }}
           securityContext:
@@ -56,11 +56,11 @@ spec:
             {{- toYaml .Values.resources | nindent 12 }}
           env:
             - name: NODE_ENV
-              value: {{ .Values.nodeEnv }}
+              value: {{ .Values.nodeEnv | quote }}
             - name: INFURA_API_KEY
               value: {{ .Values.infuraApiKey }}
             - name: NETWORK
-              value: {{ .Values.network }}
+              value: {{ .Values.network | quote }}
             - name: KAFKA_BROKERS
               value: {{ .Values.kafkaBrokers }}
             - name: LOG_LEVEL
