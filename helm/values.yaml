@@ -15,6 +15,11 @@ kafkaConsumerIcImage:
   pullPolicy: IfNotPresent
   tag: ""
 
+envIcImage:
+  repository: env-ic
+  pullPolicy: IfNotPresent
+  tag: ""
+
 imagePullSecrets: []
 nameOverride: ""
 fullnameOverride: ""
@@ -93,6 +98,8 @@ affinity: {}
 nodeEnv: production
 infuraApiKey: key
 network: goerli
-kafkaBrokers: kafka:9092
 kafkaIcTopic: ethereum-block-number
+logLevel: info
+varsToCheck: NODE_ENV,LOG_LEVEL
+restartTimeout: 5000
 appPort: 6000
