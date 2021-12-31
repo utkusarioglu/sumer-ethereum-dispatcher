@@ -11,25 +11,6 @@ services:
     depends_on:
       - kafka
 
-  kafka:
-    image: bitnami/kafka
-    environment:
-      KAFKA_ADVERTISED_HOST_NAME: kafka
-      KAFKA_CFG_ZOOKEEPER_CONNECT: zookeeper:2181
-      ALLOW_PLAINTEXT_LISTENER: "yes"
-      KAFKA_CFG_AUTO_CREATE_TOPICS_ENABLE: "true"
-    depends_on:
-      - zookeeper
-    networks:
-      - ethereum-dispatcher
-
-  zookeeper:
-    image: bitnami/zookeeper
-    networks:
-      - ethereum-dispatcher
-    environment:
-      ALLOW_ANONYMOUS_LOGIN: "yes"
-
 volumes:
   vscode-exts:
   vscode-exts-insiders:
