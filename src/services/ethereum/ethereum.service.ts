@@ -1,6 +1,7 @@
 import { ethers } from "ethers";
 import { INFURA_API_KEY, NETWORK } from "_/__config";
 import type { ListenParams } from "./ethereum.service.types";
+import loggerService from "../logger/logger.service";
 
 /**
  * Provides ethereum blockchain related services
@@ -22,8 +23,10 @@ export class EthereumService {
    */
   public listen({ blockNum, blockContent }: ListenParams) {
     this.provider.on("block", async (blockNumber) => {
+      loggerService.debug(`Received block "${blockNumber}"`)
       blockNum(blockNumber);
       const blockTx = await this.provider.getBlockWithTransactions(blockNumber);
+      loggerService.debug(`Received block transactions: "${JSON.stringify(blockTx).slice(0, 40)}..."`)
       blockContent(blockTx);
     });
   }
