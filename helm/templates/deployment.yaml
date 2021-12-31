@@ -46,7 +46,11 @@ spec:
           livenessProbe:
             httpGet:
               path: /
-              port: http
+              port: app-port
+          readinessProbe:
+            httpGet:
+              path: /
+              port: app-port
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
           env:
@@ -60,6 +64,12 @@ spec:
               value: {{ .Values.kafkaBrokers }}
             - name: LOG_LEVEL
               value: debug
+            - name: PORT
+              value: {{ .Values.appPort | quote }}
+          ports:
+            - name: app-port
+              containerPort: {{ .Values.appPort }}
+              protocol: TCP
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
