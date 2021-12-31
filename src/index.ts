@@ -3,7 +3,12 @@ import eventsService from "_/services/events/events.service";
 import kafkaService from "_services/kafka/kafka.service";
 import loggerService from "_/services/logger/logger.service";
 import http from "http";
+import * as ALL_CONFIG from "_/__config"
 import { PORT } from "_/__config";
+
+loggerService.debug(["Using config:",
+  ...Object.entries(ALL_CONFIG).map(([key, value]) => `  ${key}: ${value}`)
+].join("\n"))
 
 kafkaService.connect().then(() => {
   loggerService.info("Connected to Kafka");
