@@ -1,4 +1,4 @@
-import { LOG_LEVEL } from "_/config";
+import { LOG_LEVEL } from "_/__config";
 import { logLevel, LogEntry } from "kafkajs";
 import loggerService from "../logger/logger.service";
 

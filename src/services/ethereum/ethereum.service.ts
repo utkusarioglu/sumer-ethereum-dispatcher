@@ -1,5 +1,5 @@
 import { ethers } from "ethers";
-import { INFURA_API_KEY, NETWORK } from "_/config";
+import { INFURA_API_KEY, NETWORK } from "_/__config";
 import type { ListenParams } from "./ethereum.service.types";
 
 /**

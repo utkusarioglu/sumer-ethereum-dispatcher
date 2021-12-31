@@ -1,6 +1,6 @@
 import { createLogger, transports, format } from "winston";
 import { LOG_LEVELS } from "./logger.constants";
-import { HOSTNAME, LOG_LEVEL, NODE_ENV } from "_/config";
+import { HOSTNAME, LOG_LEVEL, NODE_ENV } from "_/__config";
 
 const { timestamp, combine, colorize, printf, errors, json } = format;
 

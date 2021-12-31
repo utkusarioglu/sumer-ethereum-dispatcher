@@ -5,7 +5,7 @@ import {
   CompressionTypes,
   CompressionCodecs,
 } from "kafkajs";
-import { KAFKA_BROKERS, HOSTNAME } from "_/config";
+import { KAFKA_BROKERS, HOSTNAME } from "_/__config";
 import loggerService from "_/services/logger/logger.service";
 import { loggingServiceAdapter, kafkaLogLevelAdapter } from "./kafka.logger";
 
