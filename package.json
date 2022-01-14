@@ -19,6 +19,12 @@
     "typescript": "^4.5.2"
   },
   "dependencies": {
+    "@opentelemetry/core": "^1.0.1",
+    "@opentelemetry/exporter-prometheus": "^0.27.0",
+    "@opentelemetry/node": "^0.24.0",
+    "@opentelemetry/plugin-http": "^0.18.2",
+    "@opentelemetry/plugin-https": "^0.18.2",
+    "@opentelemetry/sdk-metrics-base": "^0.27.0",
     "dotenv": "^10.0.0",
     "ethers": "^5.5.2",
     "kafkajs": "^1.15.0",

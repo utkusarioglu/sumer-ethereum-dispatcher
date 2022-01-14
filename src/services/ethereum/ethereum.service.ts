@@ -1,6 +1,7 @@
 import { ethers } from "ethers";
 import { INFURA_API_KEY, NETWORK } from "_/__config";
 import type { ListenParams } from "./ethereum.service.types";
+import metricsService from "_services/metrics/metrics.service";
 import loggerService from "../logger/logger.service";
 
 /**
@@ -23,11 +24,23 @@ export class EthereumService {
    */
   public listen({ blockNum, blockContent }: ListenParams) {
     this.provider.on("block", async (blockNumber) => {
-      loggerService.debug(`Received block "${blockNumber}"`)
+      loggerService.debug(`Receive new block: ${blockNumber}`);
+      metricsService.incrementBlock();
       blockNum(blockNumber);
-      const blockTx = await this.provider.getBlockWithTransactions(blockNumber);
-      loggerService.debug(`Received block transactions: "${JSON.stringify(blockTx).slice(0, 40)}..."`)
-      blockContent(blockTx);
+      try {
+        const blockTx = await this.provider.getBlockWithTransactions(
+          blockNumber
+        );
+        loggerService.debug(
+          `Receive ${blockTx.transactions.length} transactions for block ${blockNumber}`
+        );
+        metricsService.incrementTransaction(blockTx.transactions.length);
+        blockContent(blockTx);
+      } catch (e) {
+        loggerService.error(
+          `Failed to retrieve transactions for block ${blockNumber}`
+        );
+      }
     });
   }
 }
