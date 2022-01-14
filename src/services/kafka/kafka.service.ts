@@ -5,7 +5,7 @@ import {
   CompressionTypes,
   CompressionCodecs,
 } from "kafkajs";
-import { KAFKA_BROKERS, HOSTNAME } from "_/__config";
+import { KAFKA_BROKERS, HOSTNAME, NODE_ENV } from "_/__config";
 import loggerService from "_/services/logger/logger.service";
 import { loggingServiceAdapter, kafkaLogLevelAdapter } from "./kafka.logger";
 
@@ -37,6 +37,12 @@ export class KafkaService {
    * @returns void promise
    */
   async connect() {
+    if (NODE_ENV === "development") {
+      loggerService.debug(
+        "Skipping kafka connect as code is running in development env"
+      );
+      return;
+    }
     return this.producer.connect().catch(loggerService.error);
   }
 
