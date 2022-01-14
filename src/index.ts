@@ -1,14 +1,19 @@
 import ethereumService from "_services/ethereum/ethereum.service";
 import eventsService from "_/services/events/events.service";
 import kafkaService from "_services/kafka/kafka.service";
-import loggerService from "_/services/logger/logger.service";
-import http from "http";
-import * as ALL_CONFIG from "_/__config"
-import { PORT } from "_/__config";
+import loggerService from "_services/logger/logger.service";
+import { ProbeService } from "_services/probe/probe.service";
+import * as ALL_CONFIG from "_/__config";
 
-loggerService.debug(["Using config:",
-  ...Object.entries(ALL_CONFIG).map(([key, value]) => `  ${key}: ${value}`)
-].join("\n"))
+loggerService.debug(
+  [
+    "Using config:",
+    ...Object.entries(ALL_CONFIG).map(([key, value]) => `  ${key}: ${value}`),
+  ].join("\n")
+);
+
+const probeService = new ProbeService(loggerService);
+probeService.listen();
 
 kafkaService.connect().then(() => {
   loggerService.info("Connected to Kafka");
@@ -21,11 +26,3 @@ kafkaService.connect().then(() => {
     blockContent: eventsService.blockContent.pub,
   });
 });
-
-const server = http.createServer((_req, res) => {
-  res.statusCode = 200;
-  res.setHeader("Content-Type", "text/plain");
-  res.end("OK");
-});
-
-server.listen(PORT, () => loggerService.info(`Running on ${PORT}`));
