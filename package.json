@@ -7,9 +7,9 @@
   "author": "Utku Sarioglu <utkusarioglu@hotmail.com>",
   "license": "MIT",
   "scripts": {
-    "dev": "ts-node-dev -r tsconfig-paths/register src/index.ts",
+    "dev": "scripts/dev.sh",
     "build": "scripts/build.sh",
-    "start": "node lib/index.js"
+    "start": "node -r lib/tracing.js lib/index.js"
   },
   "devDependencies": {
     "@types/node": "^16.11.11",
@@ -19,12 +19,15 @@
     "typescript": "^4.5.2"
   },
   "dependencies": {
+    "@opentelemetry/api": "^1.0.4",
+    "@opentelemetry/auto-instrumentations-node": "^0.27.1",
     "@opentelemetry/core": "^1.0.1",
+    "@opentelemetry/exporter-jaeger": "^1.0.1",
     "@opentelemetry/exporter-prometheus": "^0.27.0",
-    "@opentelemetry/node": "^0.24.0",
     "@opentelemetry/plugin-http": "^0.18.2",
     "@opentelemetry/plugin-https": "^0.18.2",
     "@opentelemetry/sdk-metrics-base": "^0.27.0",
+    "@opentelemetry/sdk-node": "^0.27.0",
     "dotenv": "^10.0.0",
     "ethers": "^5.5.2",
     "kafkajs": "^1.15.0",
