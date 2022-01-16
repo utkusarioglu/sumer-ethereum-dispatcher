@@ -9,7 +9,7 @@
   "scripts": {
     "dev": "scripts/dev.sh",
     "build": "scripts/build.sh",
-    "start": "node -r lib/tracing.js lib/index.js"
+    "start": "node -r ./lib/tracing.js lib/index.js"
   },
   "devDependencies": {
     "@types/node": "^16.11.11",
